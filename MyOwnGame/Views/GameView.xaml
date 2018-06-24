@@ -1,0 +1,34 @@
+﻿<Page x:Class="MyOwnGame.Views.GameView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:controls="clr-namespace:MyOwnGame.Controls"
+      xmlns:vm="clr-namespace:MyOwnGame.ViewModels"
+      xmlns:local="clr-namespace:MyOwnGame.Views"
+      mc:Ignorable="d"
+      d:DataContext="{d:DesignInstance Type=vm:GameViewModel}" >
+
+    <controls:ContentHost IsPreloaderVisible="{Binding IsPreloaderVisible}">
+        <controls:ContentHost.MainContent>
+            <TabControl ItemsSource="{Binding Tabs}"
+                        SelectedItem="{Binding ActiveTab}"
+                        ItemContainerStyle="{DynamicResource TabItemStyle}"
+                        Style="{DynamicResource TabControlStyle}">
+                <TabControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   FontSize="20" />
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
+                <TabControl.ContentTemplate>
+                    <DataTemplate>
+                        <local:TabView />
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+            </TabControl>
+        </controls:ContentHost.MainContent>
+    </controls:ContentHost>
+</Page>
